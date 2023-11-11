@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--- Portrait -->
+
+    <style name="Button">
+        <item name="android:textSize">30dp</item>
+        <item name="android:layout_marginLeft">5dp</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:layout_marginRight">5dp</item>
+        <item name="android:layout_marginBottom">5dp</item>
+        <item name="android:layout_height">32pt</item>
+        <item name="android:fontFamily">@font/nunito</item>
+
+    </style>
+
+    <style name="ButtonLightGrey" parent="Button">
+        <item name="android:textColor">#010101</item>
+        <item name="android:background">@drawable/btn_lightgrey</item>
+
+    </style>
+
+    <style name="ButtonOrange" parent="Button">
+        <item name="android:textColor">#fff9ee</item>
+        <item name="android:background">@drawable/btn_orange</item>
+    </style>
+
+
+    <style name="ButtonGrey" parent="Button">
+        <item name="android:textColor">#fff9ee</item>
+        <item name="android:background">@drawable/btn_grey</item>
+    </style>
+
+    <style name="ButtonDarkGrey" parent="Button">
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:background">@drawable/btn_darkgrey</item>
+    </style>
+
+
+    <style name="Text">
+        <item name="android:layout_span">4</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textAlignment">textEnd</item>
+        <item name="android:textColor">#ffffff</item>
+    </style>
+
+
+    <!--- Landscape -->
+
+    <style name="ButtonLand">
+        <item name="android:textSize">20dp</item>
+        <item name="android:layout_marginLeft">5dp</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:layout_marginRight">5dp</item>
+        <item name="android:layout_marginBottom">5dp</item>
+        <item name="android:layout_height">20pt</item>
+        <item name="android:fontFamily">@font/nunito</item>
+
+    </style>
+
+    <style name="ButtonLightGreyLand" parent="ButtonLand">
+        <item name="android:textColor">#010101</item>
+        <item name="android:background">@drawable/btn_lightgrey</item>
+
+    </style>
+
+    <style name="ButtonOrangeLand" parent="ButtonLand">
+        <item name="android:textColor">#fff9ee</item>
+        <item name="android:background">@drawable/btn_orange</item>
+    </style>
+
+
+    <style name="ButtonGreyLand" parent="ButtonLand">
+        <item name="android:textColor">#fff9ee</item>
+        <item name="android:background">@drawable/btn_grey</item>
+    </style>
+
+    <style name="ButtonDarkGreyLand" parent="ButtonLand">
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:background">@drawable/btn_darkgrey</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+
+    <style name="TextLand">
+        <item name="android:layout_span">4</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textAlignment">textEnd</item>
+        <item name="android:textColor">#ffffff</item>
+    </style>
+
+
+
+</resources>

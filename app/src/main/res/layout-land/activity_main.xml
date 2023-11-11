@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingLeft="20dp"
+    android:paddingTop="20dp"
+    android:paddingRight="20dp"
+    android:paddingBottom="20dp"
+    android:background="#000000"
+    tools:context=".MainActivity">
+
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:weightSum="4"
+        android:gravity="bottom"
+        tools:layout_editor_absoluteX="15dp"
+        tools:layout_editor_absoluteY="8dp">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <TextView style="@style/Text"
+                android:id="@+id/textResult"
+                android:layout_width="wrap_content"
+                android:textSize="32pt"
+                android:layout_height="40dp"
+                app:autoSizeTextType="uniform"
+                android:text="0" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:minHeight="50dp">
+
+            <Button
+                android:id="@+id/btnSen"
+                style="@style/ButtonDarkGreyLand"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="sen" />
+
+            <Button
+                android:id="@+id/btnCos"
+                style="@style/ButtonDarkGreyLand"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="cos" />
+
+            <Button
+                android:id="@+id/btnTan"
+                style="@style/ButtonDarkGreyLand"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="tan" />
+
+            <Button
+                android:id="@+id/btnAC"
+                style="@style/ButtonLightGreyLand"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="AC" />
+
+            <Button
+                android:id="@+id/btnChange"
+                style="@style/ButtonLightGreyLand"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="+/-" />
+
+            <Button
+                android:id="@+id/btnPercent"
+                style="@style/ButtonLightGreyLand"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="%" />
+
+            <Button
+                android:id="@+id/btnDivide"
+                style="@style/ButtonOrangeLand"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="÷" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button style="@style/ButtonDarkGreyLand"
+                android:id="@+id/btnArcsen"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="arcsen" />
+
+            <Button style="@style/ButtonDarkGreyLand"
+                android:id="@+id/btnArccos"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="arccos" />
+
+            <Button style="@style/ButtonDarkGreyLand"
+                android:id="@+id/btnArctan"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="arctan" />
+
+            <Button
+                android:id="@+id/btn7"
+                style="@style/ButtonGreyLand"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="7" />
+
+            <Button
+                android:id="@+id/btn8"
+                style="@style/ButtonGreyLand"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="8" />
+
+            <Button
+                android:id="@+id/btn9"
+                style="@style/ButtonGreyLand"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="9" />
+
+            <Button
+                android:id="@+id/btnMultiply"
+                style="@style/ButtonOrangeLand"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="×" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/btnX2"
+                style="@style/ButtonDarkGreyLand"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="x^2" />
+
+            <Button
+                android:id="@+id/btnX3"
+                style="@style/ButtonDarkGreyLand"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="x^3" />
+
+            <Button
+                android:id="@+id/btnXY"
+                style="@style/ButtonDarkGreyLand"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="x^y" />
+
+            <Button
+                android:id="@+id/btn4"
+                style="@style/ButtonGreyLand"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="4" />
+
+            <Button
+                android:id="@+id/btn5"
+                style="@style/ButtonGreyLand"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="5" />
+
+            <Button
+                android:id="@+id/btn6"
+                style="@style/ButtonGreyLand"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="6" />
+
+            <Button
+                android:id="@+id/btnDiff"
+                style="@style/ButtonOrangeLand"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="-" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button style="@style/ButtonDarkGreyLand"
+                android:id="@+id/btnSquareroot"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="√" />
+
+            <Button style="@style/ButtonDarkGreyLand"
+                android:id="@+id/btnLog"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="log" />
+
+            <Button style="@style/ButtonDarkGreyLand"
+                android:id="@+id/btn1x"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="1/x" />
+
+
+            <Button
+                android:id="@+id/btn1"
+                style="@style/ButtonGreyLand"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="1" />
+
+            <Button
+                android:id="@+id/btn2"
+                style="@style/ButtonGreyLand"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="2" />
+
+            <Button
+                android:id="@+id/btn3"
+                style="@style/ButtonGreyLand"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="3" />
+
+            <Button
+                android:id="@+id/btnAdd"
+                style="@style/ButtonOrangeLand"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="+" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button style="@style/ButtonDarkGreyLand"
+                android:id="@+id/btnRand"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="rand" />
+
+            <Button style="@style/ButtonDarkGreyLand"
+                android:id="@+id/btnPI"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="π" />
+
+            <Button style="@style/ButtonDarkGreyLand"
+                android:id="@+id/btnE"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="e" />
+
+            <Button style="@style/ButtonGreyLand"
+                android:id="@+id/btn0"
+                android:layout_width="10.5dp"
+                android:layout_weight="2"
+                android:text="0"
+                />
+
+            <Button style="@style/ButtonGreyLand"
+                android:id="@+id/btnDecimal"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="."
+                />
+
+            <Button style="@style/ButtonOrangeLand"
+                android:id="@+id/btnResult"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="="
+                />
+        </TableRow>
+    </TableLayout>
+</RelativeLayout>

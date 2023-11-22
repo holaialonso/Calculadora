@@ -1,5 +1,6 @@
 package com.example.calculadora
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.PersistableBundle
@@ -17,13 +18,17 @@ class MainActivity : AppCompatActivity(), OnClickListener{
 
     //Fichero -> me traigo el layout (activity_main.xml)
     private lateinit var binding : ActivityMainBinding
-    private var componentA = " "
+    /*private var componentA = " "
     private var componentB = " "
     private var operation= " " //operación a realizar
     private var result = " " //resultado
     private var register= " " //registro de las operaciones realizadas
     private var isResult=false
-    private var isFunction=false
+    private var isFunction=false*/
+
+
+    private var result="" //resultado
+    private var operation="" //operación a realizar
 
 
 
@@ -80,8 +85,6 @@ class MainActivity : AppCompatActivity(), OnClickListener{
             binding.btnSquareroot?.setOnClickListener(this)
             binding.btnLog?.setOnClickListener(this)
 
-
-
         //Resultado
             binding.btnResult.setOnClickListener(this)
 
@@ -91,9 +94,10 @@ class MainActivity : AppCompatActivity(), OnClickListener{
     //Método para guardar el estado
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putString("textResult", result) //guardo el estado del resultado
+        outState.putString("textResult", binding.textResult.getText().toString()) //guardo el estado del resultado
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onClick(v: View?) {
 
         //Diferenciar qué botón he pulsado
@@ -101,285 +105,271 @@ class MainActivity : AppCompatActivity(), OnClickListener{
 
             //Defino la funcionalidad cuando se pulsa cada uno de los botones
             binding.btnAC.id->{
-                result=clearResult()
-                register=clearRegister()
+                clearResult()
+                result=""
+                operation=""
+
             }
 
             binding.btnDecimal.id->{
-
-                result=checkResult(isResult, result)
-
-                if(!(result.split(".").size==2)) { //compruebo si el número ya es decimal
-                    result += "."
+                if(!(binding.textResult.getText().toString().split(".").size==2)) { //compruebo si el número ya es decimal
+                    printNumber(binding.textResult.getText().toString()+'.')
                 }
-
-                isResult=false
             }
 
             binding.btnChange.id->{
-
-                if(result.get(0)!= '-'){
-                    result='-'+result
+                if(binding.textResult.getText().toString().get(0)!= '-'){ //Compruebo el signo del número
+                    printNumber('-'+binding.textResult.getText().toString())
                 }
                 else{
-                    result=result.replace("-","")
+                    printNumber(binding.textResult.getText().toString().replace("-", ""))
                 }
-
-
             }
 
             //Números
                 binding.btn0.id->{
-                    result=checkResult(isResult, result)
-                    register=checkRegister(isResult, register)
-                    result+="0"
-                    isResult=false
-
+                    printNumber(binding.textResult.getText().toString()+'0')
                 }
 
                 binding.btn1.id->{
-                    result=checkResult(isResult, result)
-                    register=checkRegister(isResult, register)
-                    result+="1"
-                    isResult=false
+                    printNumber(binding.textResult.getText().toString()+'1')
                 }
 
                 binding.btn2.id->{
-                    result=checkResult(isResult, result)
-                    register=checkRegister(isResult, register)
-                    result+="2"
-                    isResult=false
-
+                    printNumber(binding.textResult.getText().toString()+'2')
                 }
 
                 binding.btn3.id->{
-                    result=checkResult(isResult, result)
-                    register=checkRegister(isResult, register)
-                    result+="3"
-                    isResult=false
-
+                    printNumber(binding.textResult.getText().toString()+'3')
                 }
 
                 binding.btn4.id->{
-                    result=checkResult(isResult, result)
-                    register=checkRegister(isResult, register)
-                    result+="4"
-                    isResult=false
-
+                    printNumber(binding.textResult.getText().toString()+'4')
                 }
 
                 binding.btn5.id->{
-                    result=checkResult(isResult, result)
-                    register=checkRegister(isResult, register)
-                    result+="5"
-                    isResult=false
-
+                    printNumber(binding.textResult.getText().toString()+'5')
                 }
 
                 binding.btn6.id->{
-                    result=checkResult(isResult, result)
-                    register=checkRegister(isResult, register)
-                    result+="6"
-                    isResult=false
-
+                    printNumber(binding.textResult.getText().toString()+'6')
                 }
 
                 binding.btn7.id->{
-                    result=checkResult(isResult, result)
-                    register=checkRegister(isResult, register)
-                    result+="7"
-                    isResult=false
-
+                    printNumber(binding.textResult.getText().toString()+'7')
                 }
 
                 binding.btn8.id->{
-                    result=checkResult(isResult, result)
-                    register=checkRegister(isResult, register)
-                    result+="8"
-                    isResult=false
-
+                    printNumber(binding.textResult.getText().toString()+'8')
                 }
 
                 binding.btn9.id->{
-                    result=checkResult(isResult, result)
-                    register=checkRegister(isResult, register)
-                    result+="9"
-                    isResult=false
-
+                    printNumber(binding.textResult.getText().toString()+'9')
                 }
 
                 binding.btnPI?.id->{
-                    result=checkResult(isResult, result)
-                    result=Math.PI.toString()
-                    isResult=true
+                   printNumber(Math.PI.toString())
                 }
 
                 binding.btnE?.id->{
-                    result=checkResult(isResult, result)
-                    result=Math.E.toString()
-                    isResult=true
+                    printNumber(Math.E.toString())
                 }
 
                 binding.btnRand?.id->{
-                    result=checkResult(isResult, result)
-                    result=Math.random().toString()
-                    isResult=true
+                   printNumber(Math.random().toString())
                 }
 
             //Operaciones
 
                 binding.btnAdd.id->{
-                    componentA = result
-                    operation="+"
-                    result=clearResult()
-                    register+=makeRegister(componentA, operation, isResult)
-                    isResult=false
+
+                    result=makeOperation(result, operation, false);
+                    operation="+";
+                    clearFieldResult();
                 }
 
                 binding.btnDiff.id->{
-                    componentA=result
-                    operation="-"
-                    result=clearResult()
-                    register+=makeRegister(componentA, operation, isResult)
-                    isResult=false
+
+                    result=makeOperation(result, operation, false);
+                    operation="-";
+                    clearFieldResult();
                 }
 
                 binding.btnMultiply.id-> {
-                    componentA = result
-                    operation = "x"
-                    result=clearResult()
-                    register+=makeRegister(componentA, operation, isResult)
-                    isResult=false
+
+                    result=makeOperation(result, operation, false);
+                    operation="*";
+                    clearFieldResult();
                 }
 
                 binding.btnDivide.id->{
-                    componentA=result
-                    operation="/"
-                    result=clearResult()
-                    register+=makeRegister(componentA, operation, isResult)
-                    isResult=false
+
+                    result=makeOperation(result, operation, false);
+                    operation="/";
+                    clearFieldResult();
+
                 }
 
                 binding.btnXY?.id->{
-                    componentA=result
+                    result=makeOperation(result, operation, false);
                     operation="xy"
-                    result=clearResult()
+                    clearFieldResult();
 
                 }
 
             //Funciones
 
                 binding.btnPercent.id->{
-                    componentA=result
-                    operation="%"
+                    if(operation!="") {
+                        result=makeOperation(result, operation, false)
+                    }
+                    result=makeOperation(result, "%", true)
+                    printNumber(result)
 
-                    register+=makeRegister(componentA, "%", isResult) //último operando
-                    result=makeFunction(componentA, operation) //hago la operación
-                    register+=clearNumber(result) //añado el resultado
-
-                    isResult=true
-                    isFunction=true
+                    result=""
+                    operation=""
 
                 }
             
                 binding.btnSen?.id->{
-                    componentA=result
-                    operation="sen"
-                    result=makeFunction(componentA, operation)
-                    isResult=true
+                    if(operation!="") {
+                        result=makeOperation(result, operation, false)
+                    }
+                    result=makeOperation(result, "sen", true)
+                    printNumber(result)
+
+                    result=""
+                    operation=""
                 }
 
                 binding.btnCos?.id->{
-                    componentA=result
-                    operation="cos"
-                    result=makeFunction(componentA, operation)
-                    isResult=true
+                    if(operation!="") {
+                        result=makeOperation(result, operation, false)
+                    }
+                    result=makeOperation(result, "cos", true)
+                    printNumber(result)
+
+                    result=""
+                    operation=""
                 }
 
                 binding.btnTan?.id->{
-                    componentA=result
-                    operation="tan"
-                    result=makeFunction(componentA, operation)
-                    isResult=true
+                    if(operation!="") {
+                        result=makeOperation(result, operation, false)
+                    }
+                    result=makeOperation(result, "tan", true)
+                    printNumber(result)
+
+                    result=""
+                    operation=""
                 }
 
                 binding.btnArcsen?.id->{
-                    componentA=result
-                    operation="arcsen"
-                    result=makeFunction(componentA, operation)
-                    isResult=true
+                    if(operation!="") {
+                        result=makeOperation(result, operation, false)
+                    }
+                    result=makeOperation(result, "arcsen", true)
+                    printNumber(result)
+
+                    result=""
+                    operation=""
                 }
 
                 binding.btnArccos?.id->{
-                    componentA=result
-                    operation="arccos"
-                    result=makeFunction(componentA, operation)
-                    isResult=true
+                    if(operation!="") {
+                        result=makeOperation(result, operation, false)
+                    }
+                    result=makeOperation(result, "arccos", true)
+                    printNumber(result)
+
+                    result=""
+                    operation=""
                 }
 
                 binding.btnArctan?.id->{
-                    componentA=result
-                    operation="arctan"
-                    result=makeFunction(componentA, operation)
-                    isResult=true
+                    if(operation!="") {
+                        result=makeOperation(result, operation, false)
+                    }
+                    result=makeOperation(result, "arctan", true)
+                    printNumber(result)
+
+                    result=""
+                    operation=""
                 }
 
                 binding.btnX2?.id->{
-                    componentA=result
-                    operation="x2"
-                    result=makeFunction(componentA, operation)
-                    isResult=true
+                    if(operation!="") {
+                        result=makeOperation(result, operation, false)
+                    }
+                    result=makeOperation(result, "x2", true)
+                    printNumber(result)
+
+                    result=""
+                    operation=""
                 }
 
                 binding.btnX3?.id->{
-                    componentA=result
-                    operation="x3"
-                    result=makeFunction(componentA, operation)
-                    isResult=true
+                    if(operation!="") {
+                        result=makeOperation(result, operation, false)
+                    }
+                    result=makeOperation(result, "x3", true)
+                    printNumber(result)
+
+                    result=""
+                    operation=""
                 }
 
                 binding.btnSquareroot?.id->{
-                    componentA=result
-                    operation="squareRoot"
-                    result=makeFunction(componentA, operation)
-                    isResult=true
+                    if(operation!="") {
+                        result=makeOperation(result, operation, false)
+                    }
+                    result=makeOperation(result, "squareRoot", true)
+                    printNumber(result)
+
+                    result=""
+                    operation=""
                 }
 
                 binding.btnLog?.id->{
-                    componentA=result
-                    operation="log"
-                    result=makeFunction(componentA, operation)
-                    isResult=true
+                    if(operation!="") {
+                        result=makeOperation(result, operation, false)
+                    }
+                    result=makeOperation(result, "log", true)
+                    printNumber(result)
+
+                    result=""
+                    operation=""
                 }
 
                 binding.btn1x?.id->{
-                    componentA=result
-                    operation="1/x"
-                    result=makeFunction(componentA, operation)
-                    isResult=true
+                    if(operation!="") {
+                        result=makeOperation(result, operation, false)
+                    }
+                    result=makeOperation(result, "1/x", true)
+                    printNumber(result)
+
+                    result=""
+                    operation=""
                 }
 
 
             //Resultado
                 binding.btnResult.id->{
-                    if(!isResult) { //controlo que cuando se ha hecho una operación y ya tengo el resultado, si se vuelve a pulsar el el botón de "=", la pantalla se quede vacía
-                        componentB = result
-
-                        register+=makeRegister(componentB, "=", isResult) //último operando
-                        result = makeOperation(componentA, componentB, operation) //hago la operación
-                        register+=clearNumber(result) //añado el resultado
-
-                        isResult = true
+                    if(operation!="") {
+                        result = makeOperation(result, operation, false)
                     }
+                    printNumber(result)
+                    result=""
+                    operation=""
                 }
         }
 
 
         //Imprimir el resultado en pantalla
-        result = clearNumber(result)
+        /*result = clearNumber(result)
 
         binding.textResult.text = result
-        binding.textRegister?.text=register
+        binding.textRegister?.text=register*/
 
     }
 
@@ -430,17 +420,17 @@ class MainActivity : AppCompatActivity(), OnClickListener{
         }
 
     //Método para resetear la calculadora
-    private fun clearResult() : String{
-        return "0"
+    private fun clearResult(){
+        binding.textResult.text="0"
     }
 
     //Método para resetear el registro
-    private fun clearRegister() : String{
-        return " "
+    private fun clearRegister(){
+       // binding.textRegister.text="0"
     }
 
     //Método para hacer la operación correspondiente
-    private fun makeOperation(componentA : String, componentB: String, operation: String) : String{
+    /*private fun makeOperation(componentA : String, componentB: String, operation: String) : String{
 
         var aux=0.0
 
@@ -469,7 +459,7 @@ class MainActivity : AppCompatActivity(), OnClickListener{
 
         return aux.toString()
 
-    }
+    }*/
 
     //Método para hacer una operación con las funciones
     private fun makeFunction(componentA : String, operation : String) : String{
@@ -553,4 +543,165 @@ class MainActivity : AppCompatActivity(), OnClickListener{
 
         return if(!isResult) aux+operation else operation
     }
+
+
+    //---------
+
+    //Método para imprimir un número en el campo textResult
+    private fun printNumber(number: String){
+        binding.textResult.text=clearNumber(number)
+    }
+
+
+    //Método para limpiar el textResult
+    private fun clearFieldResult(){
+        binding.textResult.text="0"
+    }
+
+    //Método para resolver las operaciones matemáticas de la calculadora
+    private fun makeOperation(result: String, operation: String, isFunction: Boolean) : String{
+
+        var aux=0.0
+        var componentA=if(result.length==0) binding.textResult.getText().toString() else result
+        var componentB=if((result.length==0)||(isFunction)) "" else binding.textResult.getText().toString()
+
+
+        if(componentB.length!=0){
+            when(operation){
+                "+"->{
+                    aux=componentA.toDouble()+componentB.toDouble()
+                }
+
+                "-"->{
+                    aux=componentA.toDouble()-componentB.toDouble()
+                }
+
+                "*"->{
+                    aux=componentA.toDouble()*componentB.toDouble()
+                }
+
+                "/"->{
+                    aux=componentA.toDouble()/componentB.toDouble()
+                }
+
+                "xy"->{
+                    aux=Math.pow(componentA.toDouble(), componentB.toDouble())
+                }
+
+            }
+        }
+        else{
+
+            if(isFunction){
+
+                when(operation){
+
+                    "%"->{
+                        aux=componentA.toDouble()/100
+                    }
+
+                    "sen"->{
+
+                        //Para las funciones trigonométricas los ángulos se expresan en radianes, no en grados
+                        aux= sin(Math.toRadians(componentA.toDouble()))
+
+                    }
+
+                    "cos"->{
+                        aux= cos(Math.toRadians(componentA.toDouble()))
+                    }
+
+                    "tan"->{
+                        aux= tan(Math.toRadians(componentA.toDouble()))
+                    }
+
+                    "arcsen"->{
+                        aux= asin(Math.toRadians(componentA.toDouble()))
+                    }
+
+                    "arccos"->{
+                        aux= acos(Math.toRadians(componentA.toDouble()))
+                    }
+
+                    "arctan"->{
+                        aux= atan(Math.toRadians(componentA.toDouble()))
+                    }
+
+                    "x2"->{
+                        aux=Math.pow(componentA.toDouble(), 2.0)
+                    }
+
+                    "x3"->{
+                        aux=Math.pow(componentA.toDouble(), 3.0)
+                    }
+
+                    "squareRoot"->{
+                        aux=Math.sqrt(componentA.toDouble())
+                    }
+
+                    "log"->{
+                        aux=Math.log(componentA.toDouble())
+                    }
+
+                    "1/x"->{
+                        aux=(1/componentA.toDouble())
+                    }
+                }
+            }
+            else{
+                aux=componentA.toDouble()
+            }
+        }
+
+        return aux.toString()
+
+        /*
+            Double aux=0.0;
+			String componentA="";
+			String componentB="";
+
+			componentA=(result=="") ? fieldResult.getText() : result;
+			componentB=((result=="")||(isFunction)) ? "" : fieldResult.getText();
+
+			if(componentB!="") {
+				switch(operation) {
+
+					case "+":
+						aux=Double.parseDouble(componentA)+Double.parseDouble(componentB);
+					break;
+
+					case "-":
+						aux=Double.parseDouble(componentA)-Double.parseDouble(componentB);
+					break;
+
+					case "*":
+						aux=Double.parseDouble(componentA)*Double.parseDouble(componentB);
+					break;
+
+					case "/":
+						aux=Double.parseDouble(componentA)/Double.parseDouble(componentB);
+					break;
+				}
+			}
+			else {
+
+
+				if(operation=="%") {
+
+					aux=Double.parseDouble(componentA)/100;
+
+				}
+				else {
+					aux=Double.parseDouble(componentA);
+				}
+			}
+
+
+
+			//Retorno el resultado	-> limitando los decimales a 4
+			return clearNumber(Double.toString(makeRound(aux,4)));
+         */
+
+    }
 }
+

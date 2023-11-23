@@ -18,14 +18,6 @@ class MainActivity : AppCompatActivity(), OnClickListener{
 
     //Fichero -> me traigo el layout (activity_main.xml)
     private lateinit var binding : ActivityMainBinding
-    /*private var componentA = " "
-    private var componentB = " "
-    private var operation= " " //operación a realizar
-    private var result = " " //resultado
-    private var register= " " //registro de las operaciones realizadas
-    private var isResult=false
-    private var isFunction=false*/
-
 
     private var result="" //resultado
     private var operation="" //operación a realizar
@@ -183,9 +175,9 @@ class MainActivity : AppCompatActivity(), OnClickListener{
 
                 binding.btnAdd.id->{
 
-                    result=makeOperation(result, operation, false);
-                    operation="+";
-                    clearFieldResult();
+                    result=makeOperation(result, operation, false)
+                    operation="+"
+                    clearFieldResult()
                 }
 
                 binding.btnDiff.id->{
@@ -365,11 +357,6 @@ class MainActivity : AppCompatActivity(), OnClickListener{
         }
 
 
-        //Imprimir el resultado en pantalla
-        /*result = clearNumber(result)
-
-        binding.textResult.text = result
-        binding.textRegister?.text=register*/
 
     }
 
@@ -423,129 +410,6 @@ class MainActivity : AppCompatActivity(), OnClickListener{
     private fun clearResult(){
         binding.textResult.text="0"
     }
-
-    //Método para resetear el registro
-    private fun clearRegister(){
-       // binding.textRegister.text="0"
-    }
-
-    //Método para hacer la operación correspondiente
-    /*private fun makeOperation(componentA : String, componentB: String, operation: String) : String{
-
-        var aux=0.0
-
-        when(operation){
-
-            "+"->{
-                aux=componentA.toDouble()+componentB.toDouble()
-            }
-
-            "-"->{
-                aux=componentA.toDouble()-componentB.toDouble()
-            }
-
-            "x"->{
-                aux=componentA.toDouble()*componentB.toDouble()
-            }
-
-            "/"->{
-                aux=componentA.toDouble()/componentB.toDouble()
-            }
-
-            "xy"->{
-                aux=Math.pow(componentA.toDouble(), componentB.toDouble())
-            }
-        }
-
-        return aux.toString()
-
-    }*/
-
-    //Método para hacer una operación con las funciones
-    private fun makeFunction(componentA : String, operation : String) : String{
-
-        var aux=0.0
-
-        when(operation){
-
-            "%"->{
-
-                aux=componentA.toDouble()/100
-
-            }
-
-            "sen"->{
-
-                //Para las funciones trigonométricas los ángulos se expresan en radianes, no en grados
-                aux= sin(Math.toRadians(componentA.toDouble()))
-
-            }
-
-            "cos"->{
-                aux= cos(Math.toRadians(componentA.toDouble()))
-            }
-
-            "tan"->{
-                aux= tan(Math.toRadians(componentA.toDouble()))
-            }
-
-            "arcsen"->{
-                aux= asin(Math.toRadians(componentA.toDouble()))
-            }
-
-            "arccos"->{
-                aux= acos(Math.toRadians(componentA.toDouble()))
-            }
-
-            "arctan"->{
-                aux= atan(Math.toRadians(componentA.toDouble()))
-            }
-
-            "x2"->{
-                aux=Math.pow(componentA.toDouble(), 2.0)
-            }
-
-            "x3"->{
-                aux=Math.pow(componentA.toDouble(), 3.0)
-            }
-
-            "squareRoot"->{
-                aux=Math.sqrt(componentA.toDouble())
-            }
-
-            "log"->{
-                aux=Math.log(componentA.toDouble())
-            }
-
-            "1/x"->{
-                aux=(1/componentA.toDouble())
-            }
-        }
-        return aux.toString()
-    }
-
-    //Método con el que compruebo si el el resultado lo tengo que resetear antes de meter el siguiente valor (para que cuando hagamos una operación y tengamos el resultado no se pueda modificar)
-    private fun checkResult(isResult: Boolean, result : String) : String{
-
-        return if(isResult) "0" else result
-    }
-
-    private fun checkRegister(isResult: Boolean, register: String) : String{
-
-        return if(isResult) " " else register
-
-    }
-
-    //Método para montar el registro de las operaciones
-    private fun makeRegister(component: String, operation: String, isResult : Boolean) : String{
-
-        var aux=if(component.get(0)=='-') "("+component+")" else component
-
-        return if(!isResult) aux+operation else operation
-    }
-
-
-    //---------
 
     //Método para imprimir un número en el campo textResult
     private fun printNumber(number: String){
@@ -654,53 +518,10 @@ class MainActivity : AppCompatActivity(), OnClickListener{
         }
 
         return aux.toString()
+    }
 
-        /*
-            Double aux=0.0;
-			String componentA="";
-			String componentB="";
-
-			componentA=(result=="") ? fieldResult.getText() : result;
-			componentB=((result=="")||(isFunction)) ? "" : fieldResult.getText();
-
-			if(componentB!="") {
-				switch(operation) {
-
-					case "+":
-						aux=Double.parseDouble(componentA)+Double.parseDouble(componentB);
-					break;
-
-					case "-":
-						aux=Double.parseDouble(componentA)-Double.parseDouble(componentB);
-					break;
-
-					case "*":
-						aux=Double.parseDouble(componentA)*Double.parseDouble(componentB);
-					break;
-
-					case "/":
-						aux=Double.parseDouble(componentA)/Double.parseDouble(componentB);
-					break;
-				}
-			}
-			else {
-
-
-				if(operation=="%") {
-
-					aux=Double.parseDouble(componentA)/100;
-
-				}
-				else {
-					aux=Double.parseDouble(componentA);
-				}
-			}
-
-
-
-			//Retorno el resultado	-> limitando los decimales a 4
-			return clearNumber(Double.toString(makeRound(aux,4)));
-         */
+    //Método para imprimir en pantalla el registro
+    private fun printRegister(registro: String){
 
     }
 }
